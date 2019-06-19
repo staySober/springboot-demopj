@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sober?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&autoReconnect=true&useLocalSessionState=true
+    username: root
+    password: root
+    # 数据源配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  redis:
+    host: localhost
+    port: 6379
+    db: 6
+    timeout: 3000
+    pool:
+      max-idle: 100
+      min-idle: 1
+      max-active: 100
+      max-wait: -1
+      max-total: 1000
+
+mybatis:
+  mapper-locations: classpath:generatedMapper/*.xml
+  type-aliases-package: com.sober.demo.dao.generatedMapper  # 注意：对应实体类的路径
+
+# debug: true
+# logging:
+  # level:
+    # com.sober.demo: trace
+
+# server
+server:
+  port : 8080
+  contextPath: /
+
+# swagger
+swagger.title: permission-serivce
